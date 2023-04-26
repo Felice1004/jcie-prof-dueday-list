@@ -46,9 +46,8 @@ def csv_pretty(data):
     for key in data:
 
       for content in data[key]:
-        st.write(content)
         content = content.split('#')
-        st.write(content)
+    st.write(data)
     return data
    
 
