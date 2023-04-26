@@ -41,6 +41,7 @@ def process_raw_csv(rows, data):
       note = match.group(0)
       match = re.search(r'\d+', note)
       note = 2 - match.group(0) #尚需n位審查者
+      note = str(note)
       #審查狀態
       for status in paper_status:
         if status in original_txt:
