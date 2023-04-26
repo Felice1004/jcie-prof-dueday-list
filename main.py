@@ -14,6 +14,7 @@ def dict_to_csv(data):
     return csv_string.getvalue()
 
 def process_raw_csv(rows, data):
+  st.write('process raw csv...')
   status = ""
   for id in data['ID']:
     for cooking_txt in data.Status[data['ID']==id]:
@@ -40,6 +41,7 @@ def process_raw_csv(rows, data):
       for status in paper_status:
         if status in original_txt:
           rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status] # 輸出CEIC、AE、逾期天數、審查狀態，並以#隔開
+          st.write(rows[id])
           break
     return rows, status
 
