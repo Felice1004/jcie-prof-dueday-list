@@ -16,10 +16,8 @@ def dict_to_csv(data):
 def process_raw_csv(rows, data):
   status = ""
   for id in data['ID']:
-    st.write(id)
     for cooking_txt in data.Status[data['ID']==id]:
       original_txt = cooking_txt
-
       # 從「Status」欄位中尋找過期天數
       match = re.search(r'\d+ days overdue', cooking_txt)
       overdue_days = 0
@@ -40,15 +38,16 @@ def process_raw_csv(rows, data):
       #審查狀態
       for status in paper_status:
         if status in original_txt:
-          rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status] # 輸出CEIC、AE、逾期天數、審查狀態，並以#隔開
-          st.write(rows[id])
+          rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status] # 輸出CEIC+AE、逾期天數、審查狀態，並以#隔開
           break
   return rows, status
 
 def csv_pretty(data):
+    st.write('hello!')
     for key in data:
       for content in data[key]:
         data[key] = content.split('#')
+        st.write(key, data[key])
     return data
    
 
