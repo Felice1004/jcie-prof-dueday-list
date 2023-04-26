@@ -58,7 +58,7 @@ def csv_pretty(data):
           content = content.replace('CEIC: ','')
           content = content.replace('#','')
           content = content.strip()
-          content = content.split('AE:')
+          content = content.split('AE: ')
           for prof in content:
             result[key].append(prof)
 
