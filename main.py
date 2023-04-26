@@ -91,7 +91,7 @@ with st.sidebar:
   st.write('4. 在頁面最底端找到 Export to CSV，點擊就可以下載該 Section 的CSV檔')  
   st.image(Image.open('2.png'),width=150)
   st.write('5. 回到這裡，上傳剛剛下載的CSV檔即可！')  
-  st.info('備註：用 Excel 開啟完成的檔案時，如果發現顯示亂碼，那是因為你 Excel 所選的編碼器不正確。建議使用 Google Sheet 開啟檔案，這樣就會正常顯示囉！(不過我們也會儘快修復這個小bug！)')  
+  st.info('備註：用 Excel 開啟完成的檔案時，如果發現顯示亂碼，那是因為 Excel 所選的編碼器不正確。建議使用 Google Sheet 開啟檔案，通成就會正常顯示囉！(不過我們也會儘快修復這個小bug QQ)')  
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
