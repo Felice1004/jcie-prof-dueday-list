@@ -43,8 +43,8 @@ def process_raw_csv(rows, data):
   return rows, status
 
 def csv_pretty(data):
+    result = {}
     for key in data:
-      result = {}
       result[key]=[]
       for content in data[key]:
         content = content.split('#')
