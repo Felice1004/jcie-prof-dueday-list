@@ -7,7 +7,7 @@ import io
 from PIL import Image
 
 def dict_to_csv(data):
-    csv_string = io.StringIO(initial_value='', encoding='utf-8')
+    csv_string = io.StringIO()
     csv_writer = csv.writer(csv_string)
     csv_writer.writerow(['ID','COEIC', 'AE' ,'OVERDUE', 'STATUS','NOTE'])
     for key, value in data.items():
@@ -91,7 +91,7 @@ with st.sidebar:
   menu = st.write('4. 在頁面最底端找到 Export to CSV，點擊就可以下載該 Section 的CSV檔')  
   st.image(Image.open('2.png'),width=150)
   menu = st.write('5. 回到這裡，上傳剛剛下載的CSV檔即可！')  
-  st.write('備註：用 Excel 開啟如果發現顯示亂碼，那是因為你 Excel 所選的編碼器不正確。建議使用 Google Sheet 開啟檔案，這樣就會正常顯示囉！')  
+  st.write('備註：用 Excel 開啟如果發現顯示亂碼，那是因為你 Excel 所選的編碼器不正確。建議使用 Google Sheet 開啟檔案，這樣就會正常顯示囉！(不過我們也會儘快修復這個小bug！)')  
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
