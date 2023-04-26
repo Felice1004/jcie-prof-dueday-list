@@ -70,12 +70,15 @@ def csv_pretty(data):
 st.set_page_config(
    page_title="JCIE 催老師審稿小工具",
    page_icon="📚",
-   menu_items={"About":'https://docs.google.com/document/d/1Z6j2ai2PU5PgVjoRtaql-l78XxU8Ry4F1HwLvaGpHsk/edit?usp=sharing'},
    initial_sidebar_state="expanded"
 )
 
 with st.sidebar:
-  menu = st.write({"Tutorial":'https://docs.google.com/document/d/1Z6j2ai2PU5PgVjoRtaql-l78XxU8Ry4F1HwLvaGpHsk/edit?usp=sharing'})
+  menu = st.write('1. 登入 ScholarOne Manuscripts')
+  menu = st.write('2. 點擊 Manage/Editorial Office Centre')
+  menu = st.write('3. 點擊你目前正在整理的 Section，例如"Assign AE"')
+  menu = st.write('4. 在頁面最底端找到 Export to CSV')  
+  menu = st.write('5. 回到這裡，上傳剛剛下載的CSV檔即可！')  
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
