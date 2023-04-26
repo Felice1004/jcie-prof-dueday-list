@@ -40,25 +40,23 @@ def process_raw_csv(rows, data):
       #審查狀態
       for status in paper_status:
         if status in original_txt:
-          #尋找出現「#EIC:」的座標
+          note=''
           if status == 'Assign Reviewer':
-            note=''
             match = re.search(r'\d+ agreed', cooking_txt)
             note = match.group(0)
             match = re.search(r'\d+', note)
             note = 2 - int(match.group(0)) #尚需n位審查者
-            note = str(note)
-            note = f'尚需邀請到{note}位審查者'
+            if note != 0:
+              note = str(note)
+              note = f'尚需邀請到{note}位審查者'
           elif (status !='Assign AE') & (status !='Select Reviewer') & (status!='Invite Reviewer'):
-            note=''
             match = re.search(r'\d+ returned', cooking_txt)
             note = match.group(0)
             match = re.search(r'\d+', note)
             note = 2 - int(match.group(0)) #尚需n位審查者
-            note = str(note)
-            note = f'尚需{note}位審查者回覆'
-          else:
-            note=''
+            if note != 0:
+              note = str(note)
+              note = f'尚需{note}位審查者回覆'
 
           index = cooking_txt.strip().find("#EIC:")
           rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status,'#'+note] # 輸出CEIC+AE、逾期天數、審查狀態、尚需n位審查者，並以#隔開
