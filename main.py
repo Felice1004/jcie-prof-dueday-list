@@ -74,6 +74,9 @@ st.set_page_config(
    initial_sidebar_state="expanded"
 )
 
+with st.sidebar:
+  menu = st.write('hello')
+
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
 status = ""
