@@ -75,7 +75,7 @@ st.set_page_config(
 )
 
 with st.sidebar:
-  menu = st.write('hello')
+  menu = st.write({"Tutorial":'https://docs.google.com/document/d/1Z6j2ai2PU5PgVjoRtaql-l78XxU8Ry4F1HwLvaGpHsk/edit?usp=sharing'})
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
@@ -85,6 +85,7 @@ status = ""
 st.title('JCIE 催老師審稿小工具')
 st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！詳情請見 About')
 
+st.header('上傳檔案')
 uploaded_file = st.file_uploader("Choose a csv file")
 columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
 data = pd.DataFrame(columns=columns)
@@ -97,7 +98,7 @@ if uploaded_file is not None:
 
 task_finished = False
 
-if st.button('Execute'):
+if st.button('執行'):
   with st.spinner('Wait...'):
     output_data, status = process_raw_csv(output_data, data)
     output_data = csv_pretty(output_data)
