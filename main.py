@@ -14,8 +14,8 @@ def dict_to_csv(data):
     return csv_string.getvalue()
 
 def process_raw_csv(rows, data):
-   for id in data.ID:
-    for cooking_txt in data.Status[data.ID==id]:
+   for id in data['ID']:
+    for cooking_txt in data.Status[['ID']==id]:
       original_txt = cooking_txt
 
       # 從「Status」欄位中尋找過期天數
@@ -70,6 +70,7 @@ uploaded_file = st.file_uploader("Choose a csv file")
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
     data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
+    data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
     st.write('Preview data')
     st.write(data)
 
