@@ -82,7 +82,9 @@ task_finished = False
 if st.button('Execute'):
   with st.spinner('Wait...'):
     output_data, status = process_raw_csv(output_data, data)
+    st.write(output_data)
     output_data = csv_pretty(output_data)
+    st.write(output_data)
     st.success('Done')
     task_finished = True
 
