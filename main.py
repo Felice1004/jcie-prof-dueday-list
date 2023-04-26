@@ -39,7 +39,7 @@ def process_raw_csv(rows, data):
       match = re.search(r'\d+ returned')
       note = match.group(0)
       match = re.search(r'\d+')
-      note = match.group(0) #尚需n位審查者
+      note = 2 - match.group(0) #尚需n位審查者
       #審查狀態
       for status in paper_status:
         if status in original_txt:
@@ -48,7 +48,7 @@ def process_raw_csv(rows, data):
             note = f'尚需邀請到{note}位審查者'
           else:
             note = f'尚需{note}位審查者回覆'
-            
+
           index = cooking_txt.strip().find("#EIC:")
           rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status,'#'+note] # 輸出CEIC+AE、逾期天數、審查狀態、尚需n位審查者，並以#隔開
           break
