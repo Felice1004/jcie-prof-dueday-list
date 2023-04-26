@@ -43,7 +43,7 @@ def process_raw_csv(rows, data):
           rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status] # 輸出CEIC、AE、逾期天數、審查狀態，並以#隔開
           st.write(rows[id])
           break
-    return rows, status
+  return rows, status
 
 def csv_pretty(data):
     for key in data:
