@@ -72,7 +72,7 @@ st.set_page_config(
    page_icon="📚",
    layout="wide",
    menu_items={"Tutorial(JCIE)":'https://docs.google.com/document/d/1Z6j2ai2PU5PgVjoRtaql-l78XxU8Ry4F1HwLvaGpHsk/edit?usp=sharing'}
-   initial_sidebar_state="expanded",
+   initial_sidebar_state="expanded"
 )
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
