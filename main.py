@@ -40,7 +40,7 @@ def process_raw_csv(rows, data):
       match = re.search(r'\d+ returned', cooking_txt)
       note = match.group(0)
       match = re.search(r'\d+', note)
-      note = 2 - match.group(0) #尚需n位審查者
+      note = 2 - int(match.group(0)) #尚需n位審查者
       note = str(note)
       #審查狀態
       for status in paper_status:
