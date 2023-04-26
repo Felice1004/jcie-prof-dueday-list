@@ -63,8 +63,6 @@ def csv_pretty(data):
           for prof in content:
             result[key].append(prof)
 
-        
-    st.write(result)
     return result
    
 
