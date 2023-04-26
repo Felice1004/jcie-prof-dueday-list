@@ -8,7 +8,7 @@ import io
 def dict_to_csv(data):
     csv_string = io.StringIO()
     csv_writer = csv.writer(csv_string)
-    csv_writer.writerow(['COEIC', 'AE' ,'OVERDUE', 'STATUS','NOTE'])
+    csv_writer.writerow(['ID','COEIC', 'AE' ,'OVERDUE', 'STATUS','NOTE'])
     for key, value in data.items():
         content = [key]
         for info in value:
@@ -50,9 +50,17 @@ def csv_pretty(data):
     for key in data:
       result[key]=[]
       for content in data[key]:
-        content = content.split('#')
-        content = list(filter(None, content))
-        result[key].append(content)
+        if 'CEIC' not in content:
+          content = content.split('#')
+          content = list(filter(None, content))
+          result[key].append(content)
+        else:
+          content = content.replace('CEIC: ','')
+          content = content.split('AE:')
+          for prof in content:
+            result[key].append(prof)
+
+        
     st.write(result)
     return result
    
@@ -67,7 +75,6 @@ st.set_page_config(
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
-output_data['ID'] = ['COEIC#', 'AE#' ,'OVERDUE#', 'STATUS#','NOTE']
 status = ""
 
 
