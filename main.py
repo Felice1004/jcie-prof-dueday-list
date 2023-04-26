@@ -70,7 +70,7 @@ st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「�
 uploaded_file = st.file_uploader("Choose a csv file")
 data = pd.DataFrame()
 if uploaded_file is not None:
-    data = pd.DataFrame(pd.read_csv(uploaded_file), column=columns)
+    data = pd.DataFrame(pd.read_csv(uploaded_file), columns=columns)
     data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
     data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
     st.write('Preview data')
