@@ -72,7 +72,6 @@ columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 
 data = pd.DataFrame(columns=columns)
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
-    pd.read_csv(data)
     data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
     data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
     st.write('Preview data')
