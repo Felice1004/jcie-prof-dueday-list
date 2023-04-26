@@ -8,7 +8,7 @@ from PIL import Image
 
 def dict_to_csv(data):
     csv_string = io.StringIO()
-    csv_writer = csv.writer(csv_string)
+    csv_writer = csv.writer(csv_string, encoding="utf-8")
     csv_writer.writerow(['ID','COEIC', 'AE' ,'OVERDUE', 'STATUS','NOTE'])
     for key, value in data.items():
         content = [key]
