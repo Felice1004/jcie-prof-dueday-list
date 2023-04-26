@@ -111,4 +111,4 @@ if task_finished:
   st.download_button(
   label="Download Result",
   data=csv_data,
-  file_name=f'{status}-jcie-{timestamp}.xlsx')
+  file_name=f'{status}-jcie-{timestamp}.csv')
