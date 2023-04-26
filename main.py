@@ -58,7 +58,7 @@ st.set_page_config(
    initial_sidebar_state="expanded",
 )
 
-columns=['ID','Mamuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
+columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
 output_data['ID'] = ['COEIC#', 'AE#' ,'OVERDUE#', 'STATUS#','NOTE']
@@ -71,20 +71,22 @@ st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「�
 uploaded_file = st.file_uploader("Choose a csv file")
 data = pd.DataFrame()
 if uploaded_file is not None:
+    st.write(pd.read_csv(uploaded_file))
     data = pd.DataFrame(pd.read_csv(uploaded_file), columns=columns)
+    pd.read_csv(data)
     data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
     data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
     st.write('Preview data')
     st.write(data)
 
-
 task_finished = False
 
-with st.spinner('Wait...'):
-  output_data, status = process_raw_csv(output_data, data)
-  output_data = csv_pretty(output_data)
-  st.success('Done')
-  task_finished = True
+if st.button('Execute'):
+  with st.spinner('Wait...'):
+    output_data, status = process_raw_csv(output_data, data)
+    output_data = csv_pretty(output_data)
+    st.success('Done')
+    task_finished = True
 
 
 now = datetime.now()
