@@ -14,7 +14,8 @@ def dict_to_csv(data):
     return csv_string.getvalue()
 
 def process_raw_csv(rows, data):
-   for id in data['ID']:
+  status = ""
+  for id in data['ID']:
     for cooking_txt in data.Status[data['ID']==id]:
       original_txt = cooking_txt
 
@@ -34,7 +35,7 @@ def process_raw_csv(rows, data):
       #尋找出現「#EIC:」的座標
       index = cooking_txt.strip().find("#EIC:")
 
-      status = ""
+
       #審查狀態
       for status in paper_status:
         if status in original_txt:
@@ -69,7 +70,7 @@ st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「�
 uploaded_file = st.file_uploader("Choose a csv file")
 data = pd.DataFrame()
 if uploaded_file is not None:
-    data = pd.DataFrame(pd.read_csv(uploaded_file), columns=columns)
+    data = pd.DataFrame(pd.read_csv(uploaded_file), column=columns)
     data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
     data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
     st.write('Preview data')
