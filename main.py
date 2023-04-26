@@ -46,7 +46,7 @@ def process_raw_csv(rows, data):
             note = match.group(0)
             match = re.search(r'\d+', note)
             note = 2 - int(match.group(0)) #尚需n位審查者
-            if note != 0:
+            if note < 1:
               note = str(note)
               note = f'尚需邀請到{note}位審查者'
           elif (status !='Assign AE') & (status !='Select Reviewer') & (status!='Invite Reviewer'):
@@ -54,7 +54,7 @@ def process_raw_csv(rows, data):
             note = match.group(0)
             match = re.search(r'\d+', note)
             note = 2 - int(match.group(0)) #尚需n位審查者
-            if note != 0:
+            if note != 1:
               note = str(note)
               note = f'尚需{note}位審查者回覆'
 
