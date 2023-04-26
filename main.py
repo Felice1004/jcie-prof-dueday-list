@@ -46,7 +46,7 @@ def process_raw_csv(rows, data):
             note = match.group(0)
             match = re.search(r'\d+', note)
             note = 2 - int(match.group(0)) #尚需n位審查者
-            if note < 0:
+            if note != 0:
               note = str(note)
               note = f'尚需邀請到{note}位審查者'
           elif (status !='Assign AE') & (status !='Select Reviewer') & (status!='Invite Reviewer'):
@@ -99,7 +99,7 @@ with st.sidebar:
   st.image(Image.open('2.png'),width=150)
   st.write('5. 回到這裡，上傳剛剛下載的CSV檔即可！')  
   st.info('備註：用 Excel 開啟完成的檔案時，如果發現顯示亂碼，那是因為 Excel 所選的編碼器不正確。建議使用 Google Sheet 開啟檔案，通成就會正常顯示囉！(不過我們也會儘快修復這個小bug QQ)')  
-  st.info('備註：如果note是負的，記得要去檢查一下 reviewes required to make decision 是否為 2，再進行調整')
+  st.info('備註：如果note是負的，記得要去檢查 reviewes required to make decision 是否為 2，再進行調整')
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
