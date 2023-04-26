@@ -8,9 +8,12 @@ import io
 def dict_to_csv(data):
     csv_string = io.StringIO()
     csv_writer = csv.writer(csv_string)
-    csv_writer.writerow(['Key', 'Value'])
+    csv_writer.writerow(['COEIC', 'AE' ,'OVERDUE', 'STATUS','NOTE'])
     for key, value in data.items():
-        csv_writer.writerow([key, value])
+        content = [key]
+        for info in value:
+          content.append(info)
+        csv_writer.writerow(content)
     return csv_string.getvalue()
 
 def process_raw_csv(rows, data):
