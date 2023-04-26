@@ -71,7 +71,7 @@ st.set_page_config(
    page_title="JCIE 催老師審稿小工具",
    page_icon="📚",
    layout="wide",
-   menu_items={"Tutorial(JCIE)":'https://docs.google.com/document/d/1Z6j2ai2PU5PgVjoRtaql-l78XxU8Ry4F1HwLvaGpHsk/edit?usp=sharing'},
+   menu_items={"About":'https://docs.google.com/document/d/1Z6j2ai2PU5PgVjoRtaql-l78XxU8Ry4F1HwLvaGpHsk/edit?usp=sharing'},
    initial_sidebar_state="expanded"
 )
 
