@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 import csv
 import io
+from PIL import Image
 
 def dict_to_csv(data):
     csv_string = io.StringIO()
@@ -87,6 +88,7 @@ with st.sidebar:
   menu = st.write('2. 點擊 Manage/Editorial Office Centre')
   menu = st.write('3. 點擊你目前正在整理的 Section，例如"Assign AE"')
   menu = st.write('4. 在頁面最底端找到 Export to CSV，點擊就可以下載該 Section 的CSV檔')  
+  st.image(Image.open('2.png'))
   menu = st.write('5. 回到這裡，上傳剛剛下載的CSV檔即可！')  
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
