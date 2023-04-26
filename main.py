@@ -15,7 +15,7 @@ def dict_to_csv(data):
 
 def process_raw_csv(rows, data):
    for id in data['ID']:
-    for cooking_txt in data.Status[['ID']==id]:
+    for cooking_txt in data.Status[data['ID']==id]:
       original_txt = cooking_txt
 
       # 從「Status」欄位中尋找過期天數
@@ -56,10 +56,10 @@ st.set_page_config(
    initial_sidebar_state="expanded",
 )
 
-data = pd.DataFrame()
+columns=['ID','Mamuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
-output_data['ID'] = ['COEIC', 'AE' ,'OVERDUE', 'STATUS','NOTE']
+output_data['ID'] = ['COEIC#', 'AE#' ,'OVERDUE#', 'STATUS#','NOTE']
 status = ""
 
 
@@ -67,8 +67,9 @@ st.title('JCIE 催老師審稿小工具')
 st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！')
 
 uploaded_file = st.file_uploader("Choose a csv file")
+data = pd.DataFrame()
 if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
+    data = pd.DataFrame(pd.read_csv(uploaded_file), column=columns)
     data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
     data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
     st.write('Preview data')
