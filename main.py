@@ -36,20 +36,29 @@ def process_raw_csv(rows, data):
       cooking_txt = cooking_txt.strip().replace('\r\n','#')
 
       
-      note=''
-      match = re.search(r'\d+ returned', cooking_txt)
-      note = match.group(0)
-      match = re.search(r'\d+', note)
-      note = 2 - int(match.group(0)) #尚需n位審查者
-      note = str(note)
+    
       #審查狀態
       for status in paper_status:
         if status in original_txt:
           #尋找出現「#EIC:」的座標
           if status == 'Assign Reviewer':
+            note=''
+            match = re.search(r'\d+ agreed', cooking_txt)
+            note = match.group(0)
+            match = re.search(r'\d+', note)
+            note = 2 - int(match.group(0)) #尚需n位審查者
+            note = str(note)
             note = f'尚需邀請到{note}位審查者'
-          else:
+          elif (status !='Assign AE') & (status !='Select Reviewer') & (status!='Invite Reviewer'):
+            note=''
+            match = re.search(r'\d+ returned', cooking_txt)
+            note = match.group(0)
+            match = re.search(r'\d+', note)
+            note = 2 - int(match.group(0)) #尚需n位審查者
+            note = str(note)
             note = f'尚需{note}位審查者回覆'
+          else:
+            note=''
 
           index = cooking_txt.strip().find("#EIC:")
           rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status,'#'+note] # 輸出CEIC+AE、逾期天數、審查狀態、尚需n位審查者，並以#隔開
@@ -99,7 +108,7 @@ status = ""
 
 
 st.title('JCIE 催老師審稿小工具')
-st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！詳情請見 About')
+st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！')
 
 st.header('上傳檔案')
 uploaded_file = st.file_uploader("Choose a csv file")
