@@ -45,7 +45,8 @@ def process_raw_csv(rows, data):
 
 def csv_pretty(data):
     for key in data:
-      data[key] = data[key].split('#')
+      for content in data[key]:
+        data[key] = content.split('#')
     return data
    
 
