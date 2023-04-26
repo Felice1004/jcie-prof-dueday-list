@@ -53,7 +53,8 @@ def csv_pretty(data):
         if 'CEIC' not in content:
           content = content.split('#')
           content = list(filter(None, content))
-          result[key].append(content)
+          for info in content:
+            result[key].append(info)
         else:
           content = content.replace('CEIC: ','')
           content = content.replace('#','')
