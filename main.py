@@ -14,9 +14,9 @@ def dict_to_csv(data):
     return csv_string.getvalue()
 
 def process_raw_csv(rows, data):
-  st.write('process raw csv...')
   status = ""
   for id in data['ID']:
+    st.write(id)
     for cooking_txt in data.Status[data['ID']==id]:
       original_txt = cooking_txt
 
