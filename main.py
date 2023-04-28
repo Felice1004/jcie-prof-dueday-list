@@ -86,7 +86,7 @@ def csv_pretty(data):
 
 
 st.set_page_config(
-   page_title="JCIE 催老師審稿小工具",
+   page_title="催老師審稿小工具",
    page_icon="📚",
    initial_sidebar_state="expanded"
 )
@@ -98,8 +98,8 @@ with st.sidebar:
   st.write('4. 在頁面最底端找到 Export to CSV，點擊就可以下載該 Section 的CSV檔')  
   st.image(Image.open('2.png'),width=150)
   st.write('5. 回到這裡，上傳剛剛下載的CSV檔即可！')  
-  st.info('備註：用 Excel 開啟完成的檔案時，如果發現顯示亂碼，那是因為 Excel 所選的編碼器不正確。建議使用 Google Sheet 開啟檔案，通成就會正常顯示囉！(不過我們也會儘快修復這個小bug QQ)')  
-  st.info('備註：如果note是負的，記得要去檢查 reviewes required to make decision 是否為 2，再進行調整')
+  st.info('備註：建議使用 Google Sheet 開啟完成的檔案，這樣才不會有亂碼喔！(會儘快修復這個小bug 🥺)')  
+  st.warning('注意：如果 note 欄位出現負數，代表 reviewes required to make decision 可能不為 2，需要再人工查詢，調整天數', icon="⚠️")
 
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
