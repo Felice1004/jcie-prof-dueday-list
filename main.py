@@ -35,8 +35,6 @@ def process_raw_csv(rows, data):
         continue
       cooking_txt = cooking_txt.strip().replace('\r\n','#')
 
-      
-    
       #審查狀態
       for status in paper_status:
         if status in original_txt:
@@ -82,8 +80,6 @@ def csv_pretty(data):
             result[key].append(prof)
 
     return result
-   
-
 
 st.set_page_config(
    page_title="催老師審稿小工具",
@@ -103,6 +99,7 @@ with st.sidebar:
   st.info('備註：建議使用 Google Sheet 開啟完成的檔案，這樣才不會有亂碼喔！(會儘快修復這個小bug 🥺)')  
   st.warning('注意：如果 note 欄位出現負數，代表 reviewes required to make decision 可能不為 2，需要再人工查詢，調整天數', icon="⚠️")
 
+columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
 output_data = {}
 status = ""
@@ -113,7 +110,6 @@ st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「�
 
 st.header('上傳檔案')
 uploaded_file = st.file_uploader("Choose a csv file")
-columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
 data = pd.DataFrame(columns=columns)
 
 task_finished = False
@@ -131,13 +127,11 @@ if uploaded_file is not None:
         st.success('Done')
         task_finished = True
 
-
-now = datetime.now()
-timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
-
-csv_data = dict_to_csv(output_data)
-
 if task_finished:
+  now = datetime.now()
+  timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
+  csv_data = dict_to_csv(output_data)
+
   st.download_button(
   label="Download Result",
   data=csv_data,
