@@ -96,7 +96,7 @@ with st.sidebar:
   st.write('1. 登入 ScholarOne Manuscripts')
   st.write('2. 點擊 Manage/Editorial Office Centre')
   st.write('3. 點擊你目前正在整理的 Section，例如"Assign AE"')
-  st.write('4. 在頁面最底端找到 Export to CSV，點擊就可以下載該 Section 的CSV檔')  
+  st.write('4. 在頁面底部找到 Export to CSV 的按鈕（如下），點擊後會跳出下載小視窗，再點擊裡面的 "Click" 即可下載 CSV 檔')  
   st.image(Image.open('2.png'),width=150)
   st.write('5. 回到這裡，上傳剛剛下載的CSV檔即可！')  
   st.info('備註：建議使用 Google Sheet 開啟完成的檔案，這樣才不會有亂碼喔！(會儘快修復這個小bug 🥺)')  
