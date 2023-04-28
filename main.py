@@ -92,6 +92,7 @@ st.set_page_config(
 )
 
 with st.sidebar:
+  st.header('SOP')
   st.write('1. 登入 ScholarOne Manuscripts')
   st.write('2. 點擊 Manage/Editorial Office Centre')
   st.write('3. 點擊你目前正在整理的 Section，例如"Assign AE"')
