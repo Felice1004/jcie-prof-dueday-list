@@ -1,7 +1,17 @@
 import streamlit as st
 from PIL import Image
 
-def sidebar_init():
+
+def set_config():
+    st.set_page_config(
+    page_title="催老師審稿小工具",
+    page_icon="📚",
+    initial_sidebar_state="expanded"
+)
+    st.title('JCIE 催老師審稿小工具')
+    st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！')
+
+def set_sidebar():
     with st.sidebar:
         st.header('SOP')
         st.write('1. 登入 ScholarOne Manuscripts')

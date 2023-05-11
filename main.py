@@ -64,7 +64,7 @@ def process_raw_csv(rows, data):
           index = cooking_txt.strip().find("#EIC:")
           rows[id] = [cooking_txt[:index]+'#',overdue_days,'#'+status,'#'+str(note)] # 輸出CEIC+AE、逾期天數、審查狀態、尚需n位審查者，並以#隔開
           break
-  return rows, status
+  return rows
 
 def csv_pretty(data):
     result = {}
@@ -89,21 +89,12 @@ def csv_pretty(data):
 
 if __name__ == "__main__":
 
-  st.set_page_config(
-   page_title="催老師審稿小工具",
-   page_icon="📚",
-   initial_sidebar_state="expanded"
-)
-
-  st.title('JCIE 催老師審稿小工具')
-  st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！')
-
-  ps.sidebar_init()
-
-  columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
-  paper_status = dr.get_paper_status('paper_status_list.txt')
+  columns= dr.txt2list('config/exported_col_names.txt')
+  paper_status = dr.txt2list('config/paper_status_list.txt')
   output_data = {}
-  status = ""
+
+  ps.set_config()
+  ps.set_sidebar()
 
   st.header('上傳檔案')
   uploaded_file = st.file_uploader("Choose a csv file")
@@ -119,7 +110,7 @@ if __name__ == "__main__":
       st.write(data)
       if st.button('執行'):
         with st.spinner('Wait...'):
-          output_data, status = process_raw_csv(output_data, data)
+          output_data = process_raw_csv(output_data, data)
           output_data = csv_pretty(output_data)
           st.success('Done')
           task_finished = True

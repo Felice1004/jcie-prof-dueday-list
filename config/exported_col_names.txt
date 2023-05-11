@@ -1,0 +1,11 @@
+Manuscript ID
+Manuscript Title
+Manuscript Type
+Data Submitted
+Submitting Author
+Country of Submitting Author
+Editor In Chief
+Editor
+Status
+Manuscript Flag
+Unnamed
