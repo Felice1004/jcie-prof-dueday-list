@@ -99,7 +99,8 @@ with st.sidebar:
   st.write('5. 回到這裡，上傳剛剛下載的CSV檔')  
   st.write('6. 按下執行按鈕')  
   st.info('備註：建議使用 Google Sheet 開啟完成的檔案，這樣才不會有亂碼喔！(會儘快修復這個小bug 🥺)')  
-  st.warning('注意：如果 note 欄位出現負數，代表 reviewes required to make decision 可能不為 2，需要再人工查詢，調整天數', icon="⚠️")
+  st.warning('注意：如果 note 欄位的尚需N位審查者出現<=0的數字，這代表 reviewes required to make decision 不為 2，要再自行查詢正確人數！', icon="⚠️")
+  st.warning('詳細的教學，請參見：reurl.cc/2W2eov', icon="⚠️")
 
 columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
 paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
