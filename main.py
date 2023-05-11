@@ -1,14 +1,13 @@
 import pandas as pd
 import streamlit as st
 import re
-import unicode
 from datetime import datetime
 import csv
 import io
 from PIL import Image
 
 def to_utf8(lst):
-  return [unicode(elem).encode('utf-8') for elem in lst]
+  return [str(elem).encode('utf-8') for elem in lst]
 
 def dict_to_csv(data):
     csv_string = io.StringIO()
@@ -143,3 +142,5 @@ if task_finished:
   label="Download Result",
   data=csv_data,
   file_name=f'jcie-{timestamp}.csv')
+
+  
