@@ -6,15 +6,18 @@ import csv
 import io
 from PIL import Image
 
+def to_utf8(lst):
+  return [unicode(elem).encode('utf-8') for elem in lst]
+
 def dict_to_csv(data):
     csv_string = io.StringIO()
     csv_writer = csv.writer(csv_string)
     csv_writer.writerow(['ID','COEIC', 'AE' ,'OVERDUE', 'STATUS','NOTE'])
-    for key, value in data.items():
-        content = [key]
-        for info in value:
-          content.append(info)
-        csv_writer.writerow(content)
+    for id, cols_dump in data.items():
+        cols = [id]
+        for col in cols_dump:
+          cols.append(col)
+        csv_writer.writerow(to_utf8(cols))
     return csv_string.getvalue()
 
 def process_raw_csv(rows, data):
