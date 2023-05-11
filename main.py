@@ -48,7 +48,7 @@ def process_raw_csv(rows, data):
               note = str(note)
               note = f'尚需邀請到{note}位審查者'
           elif status == 'Awaiting AE Assignment' or status == 'AE Makes Recommendation' or status == 'CO-EIC Makes Recommendation':
-            note =''
+            note ='-'
           elif (status !='Assign AE') & (status !='Select Reviewer') & (status!='Invite Reviewer'):
             match = re.search(r'\d+ returned', cooking_txt)
             note = match.group(0)
