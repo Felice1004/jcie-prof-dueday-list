@@ -6,6 +6,9 @@ import csv
 import io
 from PIL import Image
 
+import data_retriever as dr
+import page_setup as ps
+
 def dict_to_csv(data):
     csv_string = io.StringIO()
     csv_writer = csv.writer(csv_string)
@@ -83,66 +86,54 @@ def csv_pretty(data):
 
     return result
 
-st.set_page_config(
+
+if __name__ == "__main__":
+
+  st.set_page_config(
    page_title="催老師審稿小工具",
    page_icon="📚",
    initial_sidebar_state="expanded"
 )
 
-with st.sidebar:
-  st.header('SOP')
-  st.write('1. 登入 ScholarOne Manuscripts')
-  st.write('2. 點擊 Manage/Editorial Office Centre')
-  st.write('3. 點擊你目前正在整理的 Section，例如"Assign AE"')
-  st.write('4. 在頁面底部找到 Export to CSV 的按鈕（如下），點擊後會跳出下載小視窗，再點擊裡面的 "Click" 即可下載 CSV 檔')  
-  st.image(Image.open('2.png'),width=150)
-  st.write('5. 回到這裡，上傳剛剛下載的CSV檔')  
-  st.write('6. 按下執行按鈕')  
-  st.info('備註：建議使用 Google Sheet 開啟完成的檔案，這樣才不會有亂碼喔！(會儘快修復這個小bug 🥺)')  
-  st.warning('注意：如果 note 欄位的尚需N位審查者出現<=0的數字，這代表 reviewes required to make decision 不為 2，要再自行查詢正確人數！', icon="⚠️")
-  st.warning('詳細的教學，請參見：reurl.cc/2W2eov', icon="⚠️")
+  st.title('JCIE 催老師審稿小工具')
+  st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！')
 
-def get_paper_status():
-  with open('paper_status_list.txt', 'r') as f:
-    paper_status = [line.strip() for line in f.readlines()]
-    return paper_status
+  ps.sidebar_init()
 
-columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
-paper_status = get_paper_status()
-output_data = {}
-status = ""
+  columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
+  paper_status = dr.get_paper_status('paper_status_list')
+  output_data = {}
+  status = ""
 
+  st.header('上傳檔案')
+  uploaded_file = st.file_uploader("Choose a csv file")
+  data = pd.DataFrame(columns=columns)
 
-st.title('JCIE 催老師審稿小工具')
-st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！')
+  task_finished = False
 
-st.header('上傳檔案')
-uploaded_file = st.file_uploader("Choose a csv file")
-data = pd.DataFrame(columns=columns)
+  if uploaded_file is not None:
+      data = pd.read_csv(uploaded_file)
+      data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
+      data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
+      st.write('Preview data')
+      st.write(data)
+      if st.button('執行'):
+        with st.spinner('Wait...'):
+          output_data, status = process_raw_csv(output_data, data)
+          output_data = csv_pretty(output_data)
+          st.success('Done')
+          task_finished = True
 
-task_finished = False
+  if task_finished:
+    now = datetime.now()
+    timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
+    csv_data = dict_to_csv(output_data)
 
-if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
-    data.rename(columns={'ï»¿"Manuscript ID"': 'ID'}, inplace=True)
-    data.rename(columns={'Manuscript ID': 'ID'}, inplace=True)
-    st.write('Preview data')
-    st.write(data)
-    if st.button('執行'):
-      with st.spinner('Wait...'):
-        output_data, status = process_raw_csv(output_data, data)
-        output_data = csv_pretty(output_data)
-        st.success('Done')
-        task_finished = True
+    st.download_button(
+    label="Download Result",
+    data=csv_data,
+    file_name=f'jcie-{timestamp}.csv')
 
-if task_finished:
-  now = datetime.now()
-  timestamp = now.strftime("%Y-%m-%d-%H-%M-%S")
-  csv_data = dict_to_csv(output_data)
+    
+    
 
-  st.download_button(
-  label="Download Result",
-  data=csv_data,
-  file_name=f'jcie-{timestamp}.csv')
-
-  
