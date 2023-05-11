@@ -51,7 +51,6 @@ def process_raw_csv(rows, data):
             note =''
           elif (status !='Assign AE') & (status !='Select Reviewer') & (status!='Invite Reviewer'):
             match = re.search(r'\d+ returned', cooking_txt)
-            if len(match)
             note = match.group(0)
             match = re.search(r'\d+', note)
             note = 2 - int(match.group(0)) #尚需n位審查者
