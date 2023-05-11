@@ -6,9 +6,6 @@ import csv
 import io
 from PIL import Image
 
-def to_utf8(lst):
-  return [str(elem).encode('utf-8') for elem in lst]
-
 def dict_to_csv(data):
     csv_string = io.StringIO()
     csv_writer = csv.writer(csv_string)
@@ -17,7 +14,7 @@ def dict_to_csv(data):
         cols = [id]
         for col in cols_dump:
           cols.append(col)
-        csv_writer.writerow(to_utf8(cols))
+        csv_writer.writerow(cols)
     return csv_string.getvalue()
 
 def process_raw_csv(rows, data):
@@ -105,8 +102,13 @@ with st.sidebar:
   st.warning('注意：如果 note 欄位的尚需N位審查者出現<=0的數字，這代表 reviewes required to make decision 不為 2，要再自行查詢正確人數！', icon="⚠️")
   st.warning('詳細的教學，請參見：reurl.cc/2W2eov', icon="⚠️")
 
+def get_paper_status():
+  with open('paper_status_list.txt', 'r') as f:
+    paper_status = [line.strip() for line in f.readlines()]
+    return paper_status
+
 columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
-paper_status = ['Assign Reviewer', 'Select Reviewer', 'Invite Reviewer', 'Awaiting Reviewer Scores', 'AE Makes Recommendation', 'CO-EIC Makes Recommendation', 'Awaiting AE Assignment', 'Make Decision']
+paper_status = get_paper_status()
 output_data = {}
 status = ""
 
