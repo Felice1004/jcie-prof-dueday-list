@@ -101,7 +101,7 @@ if __name__ == "__main__":
   ps.sidebar_init()
 
   columns=['Manuscript ID','Manuscript Title','Manuscript Type','Data Submitted', 'Submitting Author','Country of Submitting Author', 'Editor In Chief', 'Editor','Status','Manuscript Flag', 'Unnamed']
-  paper_status = dr.get_paper_status('paper_status_list')
+  paper_status = dr.get_paper_status('paper_status_list.txt')
   output_data = {}
   status = ""
 
