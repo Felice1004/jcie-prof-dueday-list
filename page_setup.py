@@ -4,17 +4,17 @@ from PIL import Image
 
 def set_config():
     st.set_page_config(
-    page_title="催老師審稿小工具",
+    page_title="稿件日期整理小工具",
     page_icon="📚",
     initial_sidebar_state="expanded"
 )
-    st.title('JCIE 催老師審稿小工具')
-    st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出「催老師審稿」的名單喔！')
+    st.title('稿件日期整理小工具')
+    st.info('只要把系統下載的CSV檔丟上來，就可以幫你擷取出催稿名單喔！')
 
 def set_sidebar():
     with st.sidebar:
         st.header('SOP')
-        st.write('1. 登入 ScholarOne Manuscripts')
+        st.write('1. 登入 SOM 系統')
         st.write('2. 點擊 Manage/Editorial Office Centre')
         st.write('3. 點擊你目前正在整理的 Section，例如"Assign AE"')
         st.write('4. 在頁面底部找到 Export to CSV 的按鈕（如下），點擊後會跳出下載小視窗，再點擊裡面的 "Click" 即可下載 CSV 檔')  
